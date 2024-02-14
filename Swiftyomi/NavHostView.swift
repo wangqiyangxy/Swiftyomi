@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  NavHostView.swift
 //  Swiftyomi
 //
 //  Created by renyi on 2024/2/12.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct NavHostView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    NavHostView()
 }
