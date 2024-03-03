@@ -40,8 +40,12 @@ struct BrowseView: View {
                     Text(item)
                 }
             }
-            .onChange(of: selectedBrowseItem) {
-                
+            .onChange(of: selectedBrowseItem) { oldValue, newValue in
+                if newValue == "Source" {
+                    viewModel.fetchSources()
+                } else {
+                    viewModel.fetchExtensions()
+                }
             }
             .pickerStyle(.segmented)
             .padding(.horizontal)
@@ -55,15 +59,15 @@ struct BrowseView: View {
                             }, label: {
                                 HStack {
                                     Text(source.displayName)
-                                    Spacer()
-                                    if source.supportsLatest {
-                                        Button {
-                                            
-                                        } label: {
-                                            Text("Latest")
-                                        }
-                                        .buttonStyle(.bordered)
-                                    }
+//                                    Spacer()
+//                                    if source.supportsLatest {
+//                                        Button {
+//                                            
+//                                        } label: {
+//                                            Text("Latest")
+//                                        }
+//                                        .buttonStyle(.bordered)
+//                                    }
                                 }
                             })
                         }
@@ -83,13 +87,13 @@ struct BrowseView: View {
                         ForEach(langFilteredExtensions, id: \.self) { item in
                             HStack {
                                 Text(item.name)
-                                Spacer()
-                                Button {
-                                    
-                                } label: {
-                                    Text("Install")
-                                }
-                                .buttonStyle(.bordered)
+//                                Spacer()
+//                                Button {
+//                                    
+//                                } label: {
+//                                    Text("Install")
+//                                }
+//                                .buttonStyle(.bordered)
                             }
                         }
                     } header: {
@@ -104,7 +108,9 @@ struct BrowseView: View {
                 }
             }
         }
+        #if os(iOS)
         .background(Color(uiColor: .systemGray6))
+        #endif
         .navigationTitle(selectedTab.rawValue)
         .searchable(text: $searchText, prompt: "Search source")
         .toolbar {

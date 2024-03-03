@@ -38,7 +38,7 @@ class BrowseViewModel: ObservableObject {
     @MainActor
     func fetchExtensions() {
         self.isLoading = true
-        guard let url = URL(string: "http://127.0.0.1:4567/api/v1/extension/list") else {
+        guard let url = URL(string: "http://192.168.10.16:4567/api/v1/extension/list") else {
             print("Invalid URL")
             return
         }
@@ -69,7 +69,7 @@ class BrowseViewModel: ObservableObject {
     @MainActor
     func fetchSources() {
         self.isLoading = true
-        guard let url = URL(string: "http://127.0.0.1:4567/api/v1/source/list") else {
+        guard let url = URL(string: "http://192.168.10.16:4567/api/v1/source/list") else {
             print("Invalid URL")
             return
         }

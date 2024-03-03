@@ -1,5 +1,5 @@
 //
-//  MangaDetailViewModel.swift
+//  ChapterDetailViewModel.swift
 //  Swiftyomi
 //
 //  Created by renyi on 2024/2/14.
@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-class MangaDetailViewModel: ObservableObject {
-    @Published var mangaChapterList: [MangaChapter] = [MangaChapter]()
+class ChapterDetailViewModel: ObservableObject {
+    @Published var chapter: MangaChapter = sampleChapter
     @Published var isLoading: Bool = false
     
     @MainActor
-    func fetchMangaChapters(mangaId: Int) {
+    func fetchChapterDatail(mangaId: Int, chapterIndex: Int) {
         self.isLoading = true
-        guard let url = URL(string: "http://192.168.10.16:4567/api/v1/manga/\(mangaId)/chapters") else {
+        print("fetch pageCount")
+        guard let url = URL(string: "http://192.168.10.16:4567/api/v1/manga/\(mangaId)/chapter/\(chapterIndex)") else {
             print("Invalid URL")
             return
         }
@@ -31,9 +32,9 @@ class MangaDetailViewModel: ObservableObject {
             }
             
             do {
-                let decodedData = try JSONDecoder().decode([MangaChapter].self, from: data)
+                let decodedData = try JSONDecoder().decode(MangaChapter.self, from: data)
                 DispatchQueue.main.async {
-                    self.mangaChapterList = decodedData
+                    self.chapter = decodedData
                     self.isLoading = false
                 }
             } catch {
@@ -41,5 +42,4 @@ class MangaDetailViewModel: ObservableObject {
             }
         }.resume()
     }
-    
 }

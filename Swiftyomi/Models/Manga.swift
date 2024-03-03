@@ -7,12 +7,41 @@
 
 import SwiftUI
 
-struct Manga: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct MangaList: Decodable {
+    var mangaList: [Manga]
+    var hasNextPage: Bool
 }
 
-#Preview {
-    Manga()
+struct Manga: Codable, Identifiable, Hashable, Comparable {
+    static func < (lhs: Manga, rhs: Manga) -> Bool {
+        lhs.title > rhs.title
+    }
+    
+    let id: Int
+    let sourceId: String
+    let url: String
+    let title: String
+    let thumbnailUrl: String
+    let thumbnailUrlLastFetched: Int
+    let initialized: Bool
+    let artist: String?
+    let author: String?
+    let description: String?
+    let genre: [String]?
+    let status: String
+    let inLibrary: Bool
+    let inLibraryAt: Int
+    let source: String?
+    let meta: [String:String]?
+    let realUrl: String?
+    let lastFetchedAt: Int
+    let chaptersLastFetchedAt: Int
+    let updateStrategy: String
+    let freshData: Bool
+    let unreadCount: Int?
+    let downloadCount: Int?
+    let chapterCount: Int?
+    let lastChapterRead: Int?
+    let age: Int
+    let chaptersAge: Int
 }

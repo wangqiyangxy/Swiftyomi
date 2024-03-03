@@ -7,12 +7,21 @@
 
 import SwiftUI
 
-struct MangaChapter: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    MangaChapter()
+struct MangaChapter: Decodable, Hashable {
+    let id: Int
+    let url: String
+    let name: String
+    let uploadDate: Int
+    let chapterNumber: Int
+    let mangaId: Int
+    let read: Bool
+    let bookmarked: Bool
+    let lastPageRead: Int
+    let lastReadAt: Int
+    let index: Int
+    let fetchedAt: Int
+    let realUrl: String
+    let downloaded: Bool
+    let pageCount: Int
+    let chapterCount: Int
 }

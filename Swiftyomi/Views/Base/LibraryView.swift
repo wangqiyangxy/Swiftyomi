@@ -14,7 +14,6 @@ struct LibraryView: View {
         var id: Self { self }
     }
     
-    
     @State private var searchText = ""
     @State private var mangaCategoryList: [MangaCategory] = []
     @State private var selectedMangaCategoryId = 2
@@ -67,6 +66,9 @@ struct LibraryView: View {
         }
         .onAppear {
             viewModel.fetchMangaCategory()
+            viewModel.fetchLibraryManga(categoryId: selectedMangaCategoryId)
+        }
+        .refreshable {
             viewModel.fetchLibraryManga(categoryId: selectedMangaCategoryId)
         }
     }
